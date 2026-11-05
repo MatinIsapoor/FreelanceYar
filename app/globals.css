@@ -1,0 +1,154 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Persian-first typography */
+body {
+  @apply bg-white text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100;
+  font-family: var(--font-vazirmatn), "Vazirmatn", "IRANSans", "Segoe UI", Tahoma, sans-serif;
+  font-feature-settings: "ss01", "cv11";
+  text-rendering: optimizeLegibility;
+  line-height: 1.9;
+}
+
+/* Better Persian number + heading spacing */
+h1, h2, h3, h4 {
+  line-height: 1.6;
+  text-wrap: balance;
+}
+
+p, li {
+  text-wrap: pretty;
+}
+
+::selection {
+  @apply bg-brand-500/20 text-brand-900 dark:text-brand-100;
+}
+
+/* Refined scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-slate-300 dark:bg-slate-700;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-slate-400 dark:bg-slate-600;
+}
+
+/* Prose for markdown content (RTL-aware, no typography plugin) */
+.prose-freelance {
+  max-width: none;
+  line-height: 2;
+  color: inherit;
+  font-size: 1rem;
+}
+.prose-freelance h2 {
+  @apply mt-10 scroll-mt-24 text-2xl font-extrabold tracking-tight;
+  line-height: 1.7;
+}
+.prose-freelance h3 {
+  @apply mt-8 text-xl font-bold;
+}
+.prose-freelance p {
+  @apply mt-4;
+}
+.prose-freelance ul, .prose-freelance ol {
+  @apply mt-4 space-y-2;
+  padding-inline-start: 1.5rem;
+}
+.prose-freelance ul {
+  list-style-type: disc;
+}
+.prose-freelance ol {
+  list-style-type: persian;
+}
+.prose-freelance a {
+  @apply text-brand-600 underline decoration-brand-200 underline-offset-4 hover:decoration-brand-500 dark:text-brand-300;
+}
+.prose-freelance blockquote {
+  @apply rounded-2xl border-s-4 border-brand-500 bg-brand-50/60 px-5 py-3 not-italic dark:bg-brand-950/40;
+}
+.prose-freelance code {
+  @apply rounded-md bg-slate-100 px-1.5 py-0.5 text-[0.9em] dark:bg-slate-800;
+  direction: ltr;
+  unicode-bidi: embed;
+}
+.prose-freelance pre {
+  direction: ltr;
+  text-align: left;
+}
+.prose-freelance table {
+  @apply mt-6 w-full overflow-hidden rounded-2xl border border-slate-200 text-sm dark:border-slate-800;
+}
+.prose-freelance th {
+  @apply bg-slate-50 px-4 py-3 font-bold dark:bg-slate-900;
+}
+.prose-freelance td {
+  @apply border-t border-slate-100 px-4 py-3 dark:border-slate-800;
+}
+
+/* LTR helper for code / English terms inside Persian text */
+.ltr {
+  direction: ltr;
+  unicode-bidi: embed;
+}
+
+/* SVG draw animation helpers */
+.svg-draw {
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  animation: svgDraw 2.2s ease forwards;
+}
+.svg-draw-delay-1 { animation-delay: 0.3s; }
+.svg-draw-delay-2 { animation-delay: 0.6s; }
+.svg-draw-delay-3 { animation-delay: 0.9s; }
+
+@keyframes svgDraw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Focus visibility for a11y */
+:focus-visible {
+  outline: 2px solid #3b63f6;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Smooth theme transition (avoid transitioning transform/shadow) */
+*, *::before, *::after {
+  transition-property: background-color, border-color;
+  transition-duration: 250ms;
+  transition-timing-function: ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
